@@ -32,22 +32,9 @@ export default class InsertLinkPlugin extends Plugin {
 					.setIcon("documents")
 					.onClick(() => {
 						new Notice("Copied");
-						const selectedText =
-							this.app?.workspace?.activeEditor.getSelection();
+						const editor: any = this.app?.workspace?.activeEditor;
+						const selectedText = editor.getSelection();
 						navigator.clipboard.writeText(selectedText);
-					})
-			);
-
-			menu.addItem((item) =>
-				item
-					.setTitle("Paste")
-					.setIcon("paste")
-					.onClick(async () => {
-						new Notice("Pasted");
-						const text = await navigator.clipboard.readText();
-						this.app?.workspace?.activeLeaf?.view?.editor?.replaceSelection(
-							text
-						);
 					})
 			);
 
