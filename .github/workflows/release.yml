@@ -86,6 +86,9 @@ jobs:
                   asset_name: styles.css
                   asset_content_type: text/css
 
+            - name: Zip assets directory
+              run: zip -r assets.zip src/assets
+
             - name: Upload assets directory
               id: upload-assets
               uses: actions/upload-release-asset@v1
@@ -93,6 +96,6 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: src/assets
-                  asset_name: assets
+                  asset_path: ./assets.zip
+                  asset_name: assets.zip
                   asset_content_type: application/zip # Or appropriate content type for the assets
